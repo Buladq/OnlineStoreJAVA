@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Редактирование товара</h1>
+
+<form th:method="PATCH" th:action="@{/admin/product/change/{id}(id=${product.getId()})}" th:object="${product}" enctype="multipart/form-data">
+
+    <label for="title">Название товара </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name error</div>
+    <br>
+    <label for="title">Описание товара </label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name error</div>
+    <br>
+
+    <label for="title">Цена товара </label>
+    <input type="number" th:field="*{price}" id="price"/>
+    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Name error</div>
+    <br>
+    <label for="title">Город товара </label>
+    <input type="text" th:field="*{city}" id="city"/>
+    <div style="color: red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name error</div>
+    <br>
+
+
+    <label for="file1">Первая фотография </label>
+    <input type="file"  name="file1" id="file1" height="60px"/>
+
+
+
+
+    <label for="file2">Вторая фотография </label>
+    <input type="file"  name="file2" id="file2" height="60px"/>
+
+
+    <label for="file3">Третья фотография </label>
+    <input type="file"  name="file3" id="file3" height="60px"/>
+
+    <br>
+
+    <div th:if="${error}">
+        <p style="color: red">Должны быть все фото</p>
+    </div>
+
+
+    <input type="submit" value="Добавить товар"/>
+
+</form>
+
+</body>
+</html>

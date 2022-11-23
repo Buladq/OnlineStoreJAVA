@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+</head>
+<body>
+<a th:href="@{/product/}">Магазин</a>
+
+<div th:if="${emptys}">
+    <p>Корзина пуста</p>
+</div>
+
+
+
+<div th:if="${notnull}">
+<div th:each="shopcart : ${cart}">
+    <hr/>
+    <img th:src="@{/images/{id}(id=${shopcart.getProduct().getPreviewImageId()})}" height="120px"/>
+    <p th:text="${shopcart.getProduct().getTitle()}"></p>
+    <p th:text="${shopcart.getProduct().getPrice()}"></p>
+    <form th:method="PATCH" th:action="@{/carts/plusToCart/{id}(id=${shopcart.getId()})}" th:object="${shopcart}">
+        <input type="submit" value="+"/>
+    </form>
+    <p th:text="${shopcart.getCount()}"></p>
+    <form th:method="PATCH" th:action="@{/carts/minusToCart/{id}(id=${shopcart.getId()})}" th:object="${shopcart}">
+        <input type="submit" value="-"/>
+    </form>
+
+    <form th:method="DELETE" th:action="@{/carts/delete/{id}(id=${shopcart.getId()})}" th:object="${shopcart}">
+        <input type="submit" value="Удалить"/>
+    </form>
+
+
+    </div>
+<p th:text="${'Сумма товаров: '+sum +' рублей'}"></p>
+
+
+    <form th:method="POST" th:action="@{/carts/newOrder}" >
+        <input type="submit" value="Сделать заказ"/>
+    </form>
+
+</div>
+</body>
+</html>

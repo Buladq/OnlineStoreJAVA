@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/product">Магазин</a>
+<div th:if="${image}">
+    <img th:src="@{/images/{id}(id=${person.getAvatar_id().getId()})}" height="60px"/>
+</div>
+
+
+<p th:text="${person.getUsername()}"></p>
+<p th:text="${person.getCity()}"></p>
+<p th:text="${person.getPhoneNumber()}"></p>
+<p th:text="${person.getRole()}"></p>
+
+<a th:href="@{/person/change}">Редактивровать</a>
+
+</body>
+</html>
